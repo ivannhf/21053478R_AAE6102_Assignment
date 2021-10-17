@@ -14,3 +14,4 @@ The aim of the assessment is to get familiar with decoding the GPS ephemeris dat
 3. Press 'Run'
 
 ## Author
+For any issues, please contact Hoi-Fung (Ivan) NG <21053478R@connect.polyu.hk>
