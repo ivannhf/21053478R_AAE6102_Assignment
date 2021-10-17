@@ -9,5 +9,5 @@ The aim of the assessment is to get familiar with decoding the GPS ephemeris dat
 ## Instructions
 
 1. Clone this repository by,
-- command line
-- down the zip file and extract to desired folder
+ - command line
+ - down the zip file and extract to desired folder
