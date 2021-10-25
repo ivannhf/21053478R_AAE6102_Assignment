@@ -14,7 +14,7 @@ The aim of the assessment is to get familiar with decoding the GPS ephemeris dat
 3. Press 'Run'
 
 ## Results
-Initial position in earth-centred-earth-fixed (ECEF) coordinates (in meter) is `(-2694685.473, -4293642.366, 3857878.924)`. 
+Initial position in earth-centred-earth-fixed (ECEF) coordinates (in meter) is `(-2694685.473m, -4293642.366m, 3857878.924m)`. 
 
 The LS is solved iteratively. After several iteration, the ECEF solution (in meter) is `(-2700396.828m, -4292563.343m, 3855271.799m)`. In WGS84 coordinates format with latitude (degree), longitude (degree), and altitude(meter), it is `(37.428085437°, -122.173474221°, 70.629m)`. The estimated receiver clock offset is `519457.068m (0.0017327s)`. The estimated position error is `4.947m`.
 
