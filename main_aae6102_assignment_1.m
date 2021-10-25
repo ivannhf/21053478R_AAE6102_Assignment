@@ -52,7 +52,7 @@ dtS = nan(size(eph,1), 1); % array storing satellite clock offset
 for i = 1:size(eph,1)
     % assign requried variables 
     pr      =   rcvr(i, 3);
-    t       =   eph(i, 1) - pr/v_light;
+    t       =   eph(i, 1) - pr/v_light; % calculate the transmission time
     svid    =   eph(i, 2);
     toc     =   eph(i, 3);
     toe     =   eph(i, 4);
@@ -74,11 +74,10 @@ for i = 1:size(eph,1)
     cic     =   eph(i, 21);
     crs     =   eph(i, 22);
     crc     =   eph(i, 23);    
-    
+     
     % satellite clokck offset calculation
     dt_sv = af0 + af1 * (t - toc) + af2 * (t - toc).^2;
     dtS(i,1) = dt_sv;
-    t = t - dt_sv;
     
     % satellite ECEF position calculation
     a = sqrta^2;   % 1. semimajor axis
@@ -105,7 +104,15 @@ for i = 1:size(eph,1)
         E_k = E_k - (E_k - e * sin(E_k) - M_k) / (1 - e * cos(E_k));
         % fprintf('dE_k: %e\n', abs(E_k0-E_k));
         iter = iter + 1;
-    end    
+    end
+    
+    % relativistic correction,
+    % one more loop to refine transmission time and satellite delay
+    dtr = F * e * sqrta * sin(E_k);
+    %t = t - dtr;
+    %t = t - dtS(i,1);
+    %dtS(i,1) = dtS(i,1) - dtr;
+    
     
     f_k = atan2(sqrt(1 - e^2) * sin(E_k), cos(E_k) - e);   % 6. true anomaly
     
@@ -128,7 +135,17 @@ for i = 1:size(eph,1)
     y_s = x_p * sin(omg_k) + y_p * cos(i_k) * cos(omg_k);   % ECEF y-coordinate
     z_s = y_p * sin(i_k);   % ECEF z-coordinate
     
+    % earth rotation correction
+    % rotation angle
+    omegatau = wedot * pr / v_light;
+    % rotation matrix
+    R3 = [ cos(omegatau)    sin(omegatau)   0;
+          -sin(omegatau)    cos(omegatau)   0;
+           0                0               1];
+	XS_rot = R3 * [x_s, y_s, z_s]';
+    
     XS(i, :) = [x_s, y_s, z_s];  % store corresponding satellite position
+    %XS(i, :) = XS_rot';  % store corresponding satellite position
 end
 
 % least squares to estimate receiver location 
@@ -137,7 +154,13 @@ dtR = 0;  % initial LS solution: receiver clock offset, second
 [wlat, wlon, walt] = wgsxyz2lla(XR); % initial LS solution: LLA position, deg,deg,meter
 x = [XR; dtR]; % solution; 1-3: position in ECEF, meters; 4: receiver clock offset, second;
 iter = 0;  % iteration counter
+posErr = norm(XR-tar_XR); % positioning error to given target position
+
 dryRunTbl = [iter, nan, nan, nan, nan, nan, XR', dtR, dtR*v_light, wlat, wlon, walt, nan]; % dryrun table to trace variable change
+fprintf('=== Iter #%d (initial) ===\n', iter);
+fprintf('Initial position: ECEF(m): %.3fm, %.3fm, %.3fm (WGS84 LLA: %.9f¢X, %.9f¢X, %.3fm)\n', XR, wlat, wlon, walt);
+fprintf('Total position error: %.3fm\n', posErr);
+
 while 1
     % troposheric error (saastamoinen model), resolve the troposheric error
     % each iteration
