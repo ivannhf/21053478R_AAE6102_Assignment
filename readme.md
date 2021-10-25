@@ -20,6 +20,7 @@ The LS is solved iteratively. After several iteration, the ECEF solution (in met
 
 NOTE: if you wish to disable troposheric delay correction, please uncomment [#188 in main_aae6102_assignment_1.m](https://github.com/ivannhf/21053478R_AAE6102_Assignment/blob/23389f1bdff90e984849450faa620bd3b4c2dfe1/main_aae6102_assignment_1.m#L188)
 
+If the code excuted successfully, following figure will be shown.
 ![Positioning result](Img/Figure_1_Positioning-results.jpg)
 
 Please enjoy! :tada:
