@@ -8,8 +8,8 @@ The aim of the assessment is to get familiar with decoding the GPS ephemeris dat
 
 ## Instructions
 1. Clone this repository by,
-  - command line
-  - down the zip file and extract to desired folder
+   - command line
+   - down the zip file and extract to desired folder
 2. Open file '[main_aae6102_assignment_1.m](main_aae6102_assignment_1.m)' in MATLAB
 3. Press 'Run'
 
