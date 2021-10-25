@@ -16,7 +16,7 @@ The aim of the assessment is to get familiar with decoding the GPS ephemeris dat
 ## Results
 Initial position in earth-centred-earth-fixed (ECEF) coordinates (in meter) is (-2694685.473, -4293642.366, 3857878.924). 
 
-![Positioning result](Img\Figure_1_Positioning-results.jpg)
+![Positioning result](Img/Figure_1_Positioning-results.jpg)
 
 ## Author
 For any issues, please contact Hoi-Fung (Ivan) NG via email <21053478R@connect.polyu.hk>
