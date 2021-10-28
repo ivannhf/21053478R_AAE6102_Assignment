@@ -28,3 +28,7 @@ Please enjoy! :tada:
 ## Author
 For any issues, please contact Hoi-Fung (Ivan) NG via email <21053478R@connect.polyu.hk>
 
+## References
+ARINC Research Corporation. (2000). GPS Interface Control Document ICD-GPS-200 (IRN-200C-004): Navstar GPS Space Segment and Aviation User Interfaces.
+Herrera Olmo, Antonio & Suhandri, Hendy & Realini, Eugenio & Reguzzoni, Mirko & Lacy, Maria Clara de. (2015). goGPS: open-source MATLAB software. GPS Solutions. 20. 1-9. 10.1007/s10291-015-0469-x. 
+Takasu Tomoji. (2009). RTKLIB: Open Source Program Package for RTK-GPS,” *FOSS4G 2009.* Tokyo, Japan, November 2, 2009.
