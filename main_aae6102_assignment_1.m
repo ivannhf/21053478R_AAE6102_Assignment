@@ -8,6 +8,9 @@ clear;
 close all;
 warning('off', 'all');
 
+%% Settings
+ENA_TROPO_ERR_CORR = true; % flag to enable tropospheric error estimation using Saastamoinen model
+
 %% Read given data
 % ephemeris: tow, svid, toc, toe, af0, af1, af2, ura, e, sqrta, dn, m0, w, omg0, i0, odot, idot, cus, cuc, cis, cic, crs, crc, iod
 eph = importdata(fullfile('Data','eph.dat'));
@@ -109,9 +112,7 @@ for i = 1:size(eph,1)
     % relativistic correction,
     % one more loop to refine transmission time and satellite delay
     dtr = F * e * sqrta * sin(E_k);
-    %t = t - dtr;
-    %t = t - dtS(i,1);
-    %dtS(i,1) = dtS(i,1) - dtr;
+    dtS(i,1) = dtS(i,1) + dtr;
     
     
     f_k = atan2(sqrt(1 - e^2) * sin(E_k), cos(E_k) - e);   % 6. true anomaly
@@ -144,8 +145,8 @@ for i = 1:size(eph,1)
            0                0               1];
 	XS_rot = R3 * [x_s, y_s, z_s]';
     
-    XS(i, :) = [x_s, y_s, z_s];  % store corresponding satellite position
-    %XS(i, :) = XS_rot';  % store corresponding satellite position
+    %XS(i, :) = [x_s, y_s, z_s];  % store corresponding satellite position
+    XS(i, :) = XS_rot';  % store corresponding satellite position
 end
 
 % least squares to estimate receiver location 
@@ -162,30 +163,30 @@ fprintf('Initial position: ECEF(m): %.3fm, %.3fm, %.3fm (WGS84 LLA: %.9f¢X, %.9f
 fprintf('Total position error: %.3fm\n', posErr);
 
 while 1
-    % troposheric error (saastamoinen model), resolve the troposheric error
-    % each iteration
-    humi = 1.0;
-    [wlat, wlon, walt] = wgsxyz2lla(XR);
-    tropo_err = zeros(size(XS, 1), 1);
-    for i = 1:size(XS, 1)
-        enu = wgsxyz2enu(XS(i,:)', wlat, wlon, walt);
-        el = asin(enu(3)/sqrt(enu(1)^2 + enu(2)^2));
-        if walt < 0
-            hgt = 0;
-        else
-            hgt = walt;
+    % troposheric error (saastamoinen model), resolve the troposheric error each iteration
+    if ENA_TROPO_ERR_CORR
+        humi = 1.0;
+        [wlat, wlon, walt] = wgsxyz2lla(XR);
+        tropo_err = zeros(size(XS, 1), 1);
+        for i = 1:size(XS, 1)
+            enu = wgsxyz2enu(XS(i,:)', wlat, wlon, walt);
+            el = asin(enu(3)/sqrt(enu(1)^2 + enu(2)^2));
+            if walt < 0
+                hgt = 0;
+            else
+                hgt = walt;
+            end
+            pres = Pr * (1 - 2.2557e-5 * hgt)^5.2568;
+            temp = temp0 - 6.5e-3 * hgt + 273.16;
+            e = 6.108 * humi * exp((17.15 * temp - 4684.0) / (temp - 38.45));
+            
+            % saastamoninen model
+            z = pi / 2.0 - el;
+            trph = 0.0022768 * pres / (1.0-0.00266*cos(2.0 * wlat) - 0.00028 * hgt / 1e3) / cos(z);
+            trpw = 0.002277 * (1255.0 / temp + 0.05) * e / cos(z);
+            tropo_err(i, 1) = trph + trpw;
         end
-        pres = Pr * (1 - 2.2557e-5 * hgt)^5.2568;
-        temp = temp0 - 6.5e-3 * hgt + 273.16;
-        e = 6.108 * humi * exp((17.15 * temp - 4684.0) / (temp - 38.45));
-        
-        % saastamoninen model
-        z = pi / 2.0 - el;
-        trph = 0.0022768 * pres / (1.0-0.00266*cos(2.0 * wlat) - 0.00028 * hgt / 1e3) / cos(z);
-        trpw = 0.002277 * (1255.0 / temp + 0.05) * e / cos(z);
-        tropo_err(i, 1) = trph + trpw;
     end
-    % tropo_err = zeros(size(XS, 1), 1);
     % troposheric error (saastamoinen model)
     
     pr = rcvr(:, 3); % extract measured pseudorange
@@ -213,7 +214,7 @@ while 1
     fprintf('=== Iter #%d ===\n', iter);
     fprintf('£Gx: %.3fm, %.3fm, %.3fm, %.7fs (%.3fm)\n', dx, dx(4)*v_light);
     fprintf('Updated position: ECEF(m): %.3fm, %.3fm, %.3fm (WGS84 LLA: %.9f¢X, %.9f¢X, %.3fm)\n', XR, wlat, wlon, walt);
-    fprintf('Updated receiver clock offset: %.7fs; %.3fm\n', dtR, dtR*v_light);
+    fprintf('Updated receiver clock offset: %.7fs (%.3fm)\n', dtR, dtR*v_light);
     fprintf('Total position error: %.3fm\n', posErr);
     fprintf('LS residual, squared error: %.3fm^2\n', residualSE);
     
