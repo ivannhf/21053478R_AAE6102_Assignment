@@ -97,7 +97,7 @@ for i = 1:size(eph,1)
     
     M_k = m0 + n*(t_k);   % 4. mean anomaly
     
-    % 5. eccentrix anomaly, Kepler's equation (solve by iterations)
+    % 5. eccentric anomaly, Kepler's equation (solve by iterations)
     max_iter = 12; % set maximum number of iterations
     iter = 0;
     E_k = M_k;
@@ -159,7 +159,7 @@ posErr = norm(XR-tar_XR); % positioning error to given target position
 
 dryRunTbl = [iter, nan, nan, nan, nan, nan, XR', dtR, dtR*v_light, wlat, wlon, walt, nan]; % dryrun table to trace variable change
 fprintf('=== Iter #%d (initial) ===\n', iter);
-fprintf('Initial position: ECEF(m): %.3fm, %.3fm, %.3fm (WGS84 LLA: %.9f¢X, %.9f¢X, %.3fm)\n', XR, wlat, wlon, walt);
+fprintf('Initial position: ECEF(m): %.3fm, %.3fm, %.3fm (WGS84 LLA: %.9fï¿½X, %.9fï¿½X, %.3fm)\n', XR, wlat, wlon, walt);
 fprintf('Total position error: %.3fm\n', posErr);
 
 while 1
@@ -212,8 +212,8 @@ while 1
     
     dryRunTbl = [dryRunTbl; iter, dx', residualSE, XR', dtR, dtR*v_light, wlat, wlon, walt, posErr];
     fprintf('=== Iter #%d ===\n', iter);
-    fprintf('£Gx: %.3fm, %.3fm, %.3fm, %.7fs (%.3fm)\n', dx, dx(4)*v_light);
-    fprintf('Updated position: ECEF(m): %.3fm, %.3fm, %.3fm (WGS84 LLA: %.9f¢X, %.9f¢X, %.3fm)\n', XR, wlat, wlon, walt);
+    fprintf('ï¿½Gx: %.3fm, %.3fm, %.3fm, %.7fs (%.3fm)\n', dx, dx(4)*v_light);
+    fprintf('Updated position: ECEF(m): %.3fm, %.3fm, %.3fm (WGS84 LLA: %.9fï¿½X, %.9fï¿½X, %.3fm)\n', XR, wlat, wlon, walt);
     fprintf('Updated receiver clock offset: %.7fs (%.3fm)\n', dtR, dtR*v_light);
     fprintf('Total position error: %.3fm\n', posErr);
     fprintf('LS residual, squared error: %.3fm^2\n', residualSE);
