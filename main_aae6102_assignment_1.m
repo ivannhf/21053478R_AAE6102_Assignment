@@ -163,7 +163,7 @@ fprintf('Initial position: ECEF(m): %.3fm, %.3fm, %.3fm (WGS84 LLA: %.9f�X, %.
 fprintf('Total position error: %.3fm\n', posErr);
 
 while 1
-    % troposheric error (saastamoinen model), resolve the troposheric error each iteration
+    % Tropospheric error (saastamoinen model), resolve the tropospheric error each iteration
     if ENA_TROPO_ERR_CORR
         humi = 1.0;
         [wlat, wlon, walt] = wgsxyz2lla(XR);
@@ -187,7 +187,7 @@ while 1
             tropo_err(i, 1) = trph + trpw;
         end
     end
-    % troposheric error (saastamoinen model)
+    % Tropospheric error (saastamoinen model)
     
     pr = rcvr(:, 3); % extract measured pseudorange
     
