@@ -23,8 +23,8 @@ NOTE: if you wish to disable troposheric delay correction, please change the val
 If the code excuted successfully, following figure will be shown.
 ![Positioning result](Img/Figure_1_Positioning-results.jpg)
 
-And skyplot of given dataset is as following,
-![Skyplot](Img\Figure_2_Skyplot.jpg)
+And skyplot of given dataset is as following, each circle represents one satellite, the color represents its SNR in dBHz, the text inside is the corresponding satellite ID.
+![Skyplot](Img/Figure_2_Skyplot.jpg)
 
 Please enjoy! :tada:
 
