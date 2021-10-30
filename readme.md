@@ -16,12 +16,15 @@ The aim of the assessment is to get familiar with decoding the GPS ephemeris dat
 ## Results
 Initial position in earth-centred-earth-fixed (ECEF) coordinates (in meter) is `(-2694685.473m, -4293642.366m, 3857878.924m)`. 
 
-The LS is solved iteratively. After several iteration, the ECEF solution (in meter) is `(-2700396.828m, -4292563.343m, 3855271.799m)`. In WGS84 coordinates format with latitude (degree), longitude (degree), and altitude(meter), it is `(37.428085437°, -122.173474221°, 70.629m)`. The estimated receiver clock offset is `519457.068m (0.0017327s)`. The estimated position error is `4.947m`.
+The LS is solved iteratively. After several iteration, the ECEF solution (in meter) is `(-2700418.609m, -4292537.059m, 3855264.740m)`. In WGS84 coordinates format with latitude (degree), longitude (degree), and altitude(meter), it is `(37.428085437°, -122.173474221°, 70.629m)`. The estimated receiver clock offset is `519449.313m (0.0017327s)`. The estimated position error is `30.004m`.
 
 NOTE: if you wish to disable troposheric delay correction, please change the value in [Line 12 in main_aae6102_assignment_1.m](main_aae6102_assignment_1.m#L12) to `false`, e.g. `ENA_TROPO_ERR_CORR = false;`
 
 If the code excuted successfully, following figure will be shown.
 ![Positioning result](Img/Figure_1_Positioning-results.jpg)
+
+And skyplot of given dataset is as following,
+![Skyplot](Img\Figure_2_Skyplot.jpg)
 
 Please enjoy! :tada:
 
