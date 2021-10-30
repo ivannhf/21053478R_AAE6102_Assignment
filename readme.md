@@ -35,7 +35,7 @@ And skyplot of given dataset is as following, each circle represents one satelli
 <img src="Img/Figure_2_Skyplot.jpg">
 </p>
 
-Please enjoy! :tada:
+<!-- Please enjoy! :tada: -->
 
 ## Author
 For any issues, please contact Hoi-Fung (Ivan) NG via email <21053478R@connect.polyu.hk>
