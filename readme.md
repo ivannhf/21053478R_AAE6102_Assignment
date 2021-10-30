@@ -22,6 +22,7 @@ NOTE: if you wish to disable troposheric delay correction, please change the val
 
 If the code excuted successfully, following figure will be shown.
 <p align="center">
+<img src="Img/Figure_1_Positioning-results.jpg">
 ![Positioning result](Img/Figure_1_Positioning-results.jpg)
 </p>
 
