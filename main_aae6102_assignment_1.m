@@ -77,10 +77,6 @@ for i = 1:size(eph,1)
     cic     =   eph(i, 21);
     crs     =   eph(i, 22);
     crc     =   eph(i, 23);    
-     
-    % satellite clokck offset calculation
-    dt_sv = af0 + af1 * (t - toc) + af2 * (t - toc).^2;
-    dtS(i,1) = dt_sv;
     
     % satellite ECEF position calculation
     a = sqrta^2;   % 1. semimajor axis
@@ -107,13 +103,7 @@ for i = 1:size(eph,1)
         E_k = E_k - (E_k - e * sin(E_k) - M_k) / (1 - e * cos(E_k));
         % fprintf('dE_k: %e\n', abs(E_k0-E_k));
         iter = iter + 1;
-    end
-    
-    % relativistic correction,
-    % one more loop to refine transmission time and satellite delay
-    dtr = F * e * sqrta * sin(E_k);
-    dtS(i,1) = dtS(i,1) + dtr;
-    
+    end    
     
     f_k = atan2(sqrt(1 - e^2) * sin(E_k), cos(E_k) - e);   % 6. true anomaly
     
@@ -147,6 +137,11 @@ for i = 1:size(eph,1)
     
     %XS(i, :) = [x_s, y_s, z_s];  % store corresponding satellite position
     XS(i, :) = XS_rot';  % store corresponding satellite position
+     
+    % satellite clokck offset calculation
+    dt_sv = af0 + af1 * (t - toc) + af2 * (t - toc).^2; % code phase offset by polynomial coefficients
+    dtr = F * e * sqrta * sin(E_k); % relativistic correction
+    dtS(i,1) = dt_sv + dtr;
 end
 
 % least squares to estimate receiver location 
