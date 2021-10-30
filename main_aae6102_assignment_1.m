@@ -170,7 +170,7 @@ while 1
         tropo_err = zeros(size(XS, 1), 1);
         for i = 1:size(XS, 1)
             enu = wgsxyz2enu(XS(i,:)', wlat, wlon, walt);
-            el = asin(enu(3)/sqrt(enu(1)^2 + enu(2)^2));
+            el = atan2(enu(3), sqrt(enu(1)^2 + enu(2)^2));
             if walt < 0
                 hgt = 0;
             else
@@ -212,7 +212,7 @@ while 1
     
     dryRunTbl = [dryRunTbl; iter, dx', residualSE, XR', dtR, dtR*v_light, wlat, wlon, walt, posErr];
     fprintf('=== Iter #%d ===\n', iter);
-    fprintf('�Gx: %.3fm, %.3fm, %.3fm, %.7fs (%.3fm)\n', dx, dx(4)*v_light);
+    fprintf('Delta x: %.3fm, %.3fm, %.3fm, %.7fs (%.3fm)\n', dx, dx(4)*v_light);
     fprintf('Updated position: ECEF(m): %.3fm, %.3fm, %.3fm (WGS84 LLA: %.9f�X, %.9f�X, %.3fm)\n', XR, wlat, wlon, walt);
     fprintf('Updated receiver clock offset: %.7fs (%.3fm)\n', dtR, dtR*v_light);
     fprintf('Total position error: %.3fm\n', posErr);
@@ -230,6 +230,13 @@ fprintf('Init. position ECEF: %.3fm, %.3fm, %.3fm -> Final. position ECEF: %.3fm
 fprintf('Target position ECEF: %.3fm, %.3fm, %.3fm, positioning error: %.3fm\n', tar_XR, norm([tar_XR-XR]));
 fprintf('Receiver clock offset: %.7fs, %.3fm\n', dtR, dtR*v_light);
 
+% Calculate DOP value
+DOPmat = inv(H' * H);
+fprintf('HDOP: %.2f; ', sqrt(DOPmat(1,1) + DOPmat(2,2)));
+fprintf('VDOP: %.2f ', sqrt(DOPmat(3,3)));
+fprintf('PDOP: %.2f; ', sqrt(DOPmat(1,1) + DOPmat(2,2) + DOPmat(3,3)));
+fprintf('GDOP: %.2f \n', sqrt(DOPmat(1,1) + DOPmat(2,2) + DOPmat(3,3) + DOPmat(4,4)));
+
 % plot position figure
 figure; 
 hold on;
@@ -241,6 +248,49 @@ pltObj(3,1) = plot(tar_XR_lla(2), tar_XR_lla(1), 'p', 'MarkerFaceColor', 'g', 'M
 xlabel('Longitude (deg)'); ylabel('Latitude (deg)');
 legend(pltObj, {'Initial position'; 'LS estimated position'; 'Given reference position'});
 
+% plot skyplot
+theta = linspace(0, 2*pi, 361);
+Data0 = zeros(1,361);
+Data2 = zeros(1,361)+90;
+[x0, y0] = pol2cart(theta, Data0);
+[x2, y2] = pol2cart(theta, Data2);
+figure;
+ax = gca;
+colormap(jet);
+hold(ax,'on'); axis(ax,'equal'); axis(ax,'off');
+patch(ax,[x0 fliplr(x2)], [y0 fliplr(y2)], [1 1 1]) 
+plot(ax,x2, y2, '-', 'Color', [0.4 0.4 0.4]);
+for i = 0:30:180
+    plot(ax,[90,-90].*sind(i), [90,-90].*cosd(i), '-', 'Color', ones(1,3).*0.6);
+    if i ~= 0 & i ~= 180
+        text(ax,[85,-85].*sind(i), [85,-85].*cosd(i), string([i;i+180]),'FontSize',12,'HorizontalAlignment','center');
+    else
+        if i == 0
+            text(ax,[85,-85].*sind(i)+[-6,0], [85,-85].*cosd(i), {'N';'180'},'FontSize',12,'HorizontalAlignment','center');
+        end
+    end
+end
+for i = 90:-10:0
+    [x3, y3] = pol2cart(theta, i);
+    plot(ax,x3, y3, '-', 'Color', ones(1,3).*0.6);
+    if mod((i/10),2)==1 && i~=90
+        text(ax,-6,i,num2str(90-i),'FontSize',12,'HorizontalAlignment','center');
+    end
+end
+for i = 1:size(XS, 1)
+    enu = wgsxyz2enu(XS(i,:)', wlat, wlon, walt);
+    az = atan2(enu(1), enu(2)) * 180 / pi;
+    el = atan2(enu(3), sqrt(enu(1)^2 + enu(2)^2)) * 180 / pi;
+    [x,y] = pol2cart((az-(az-45).*2).*pi/180, 90 - el);
+    %plot(x, y, 'o', 'MarkerFaceColor', 'g', 'MarkerEdgeColor', 'k', 'LineWidth', 1.3, 'MarkerSize', 25);
+    scatter(x, y, 600, rcvr(i,7), 'filled', 'MarkerEdgeColor', 'k');
+    text(x, y, sprintf('%02d', rcvr(i,2)), 'Color', 'k', 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 12);
+    % fprintf('az %.3f %.3f\n', az, el);
+end
+hcb = colorbar;
+caxis([35,50]);
+set(get(hcb, 'Title'), 'String', 'SNR (dBHz)');
+set(gca, 'FontSize', 12);
 
 
 
