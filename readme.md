@@ -13,6 +13,11 @@ The aim of the assessment is to get familiar with decoding the GPS ephemeris dat
 2. Open file '[main_aae6102_assignment_1.m](main_aae6102_assignment_1.m)' in MATLAB
 3. Press 'Run'
 
+
+## Code Explanation
+The first part requires us to use the orbit parameters in ephemeris data to resolve the satellites’ ECEF position and satellite clock offset. The instruction on how to use the orbit parameters to estimate the satellite position for a given GPS time can be found in (ARINC, 2000). The satellites’ position can be calculated by Table 20-IV in (ARINC, 2000). After we obtained the earth-fixed coordinates, we also apply the earth rotation correction. Where this correction is to compensate the signal attenuation during the transmission that caused by the earth rotation. The implementation can be found in (Realini & Reguzzoni, 2013). In the other hand, the satellite clock offset can also be obtained from ephemeris data, which can refers to equation (2) in (ARINC, 2000).
+
+
 ## Results
 Initial position in earth-centred-earth-fixed (ECEF) coordinates (in meter) is `(-2694685.473m, -4293642.366m, 3857878.924m)`. 
 

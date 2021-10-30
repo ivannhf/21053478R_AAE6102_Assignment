@@ -231,6 +231,7 @@ fprintf('Target position ECEF: %.3fm, %.3fm, %.3fm, positioning error: %.3fm\n',
 fprintf('Receiver clock offset: %.7fs, %.3fm\n', dtR, dtR*v_light);
 
 % Calculate DOP value
+H(:,4) = 1;
 DOPmat = inv(H' * H);
 fprintf('HDOP: %.2f; ', sqrt(DOPmat(1,1) + DOPmat(2,2)));
 fprintf('VDOP: %.2f ', sqrt(DOPmat(3,3)));
