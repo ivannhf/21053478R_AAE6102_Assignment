@@ -48,6 +48,11 @@ Hr = 50.0;
 % temperature at sea-level
 temp0 = 15;
 
+%% Symbol for printing
+sym_degree = char(176);
+sym_delta = char(916);
+sym_sigma = char(948);
+
 %% Main program
 % 1. Calculate satellite ECEF position vector
 XS = nan(size(eph,1), 3); % matrix storing satellite ECEF position
@@ -207,11 +212,11 @@ while 1
     
     dryRunTbl = [dryRunTbl; iter, dx', residualSE, XR', dtR, dtR*v_light, wlat, wlon, walt, posErr];
     fprintf('=== Iter #%d ===\n', iter);
-    fprintf('Delta x: %.3fm, %.3fm, %.3fm, %.7fs (%.3fm)\n', dx, dx(4)*v_light);
-    fprintf('Updated position: ECEF(m): %.3fm, %.3fm, %.3fm (WGS84 LLA: %.9f�X, %.9f�X, %.3fm)\n', XR, wlat, wlon, walt);
+    fprintf([sym_delta 'x: %.3fm, %.3fm, %.3fm, %.7fs (%.3fm)\n'], dx, dx(4)*v_light);
+    fprintf(['Updated position: ECEF(m): %.3fm, %.3fm, %.3fm (WGS84 LLA: %.9f' sym_degree ', %.9f' sym_degree ', %.3fm)\n'], XR, wlat, wlon, walt);
     fprintf('Updated receiver clock offset: %.7fs (%.3fm)\n', dtR, dtR*v_light);
     fprintf('Total position error: %.3fm\n', posErr);
-    fprintf('LS residual, squared error: %.3fm^2\n', residualSE);
+    fprintf(['LS residual ' sym_sigma 'x, squared error: %.3fm^2\n'], residualSE);
     
     if norm(dx(1:3)) < 1e-4 || ...  % check delta position solution smaller than threshold
             iter > 12  % check iteration number
