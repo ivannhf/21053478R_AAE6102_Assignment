@@ -21,6 +21,10 @@ The code can be divided into two main part. The first part requires us to use th
 </p>
 
 The instruction on how to use the orbit parameters to estimate the satellite position for a given GPS time can be found in (ARINC, 2000). The satellites’ position can be calculated by Table 20-IV in (ARINC, 2000). After we obtained the earth-fixed coordinates, we also apply the earth rotation correction.
+<p align="center">
+<img src="Img/eq_symbols/image002.png">
+</p>
+where <img src="Img/eq_symbols/image003.png"> is the transformed coordinates of each satellite, and will be stored and use for LS later. <img src="Img/eq_symbols/image004.png"> are X, Y, and Z coordinates of the satellite following Table 20-IV in (ARINC, 2000). 
 
 
 ## Results
@@ -64,7 +68,7 @@ And skyplot of given dataset is as following, each circle represents one satelli
 <img src="Img/Figure_3_Skyplot.jpg">
 </p>
 
-<!-- Please enjoy! :tada: -->
+Please enjoy! :tada:
 
 ## Author
 For any issues, please contact Hoi-Fung (Ivan) NG via email <21053478R@connect.polyu.hk>
