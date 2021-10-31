@@ -27,8 +27,18 @@ The instruction on how to use the orbit parameters to estimate the satellite pos
 <p align="left">
 where <img src="Img/eq_symbols/image003.png"> is the transformed coordinates of each satellite, and will be stored and use for LS later. <img src="Img/eq_symbols/image004.png"> are X, Y, and Z coordinates of the satellite following Table 20-IV in (ARINC, 2000). <img src="Img/eq_symbols/image006.png"> is the constant of the earth’s rotation rate. <img src="Img/eq_symbols/image007.png"> is the travelling time for the signal, such as <img src="Img/eq_symbols/image008.png">. This correction is to compensate the signal attenuation during the transmission that caused by the earth rotation.
 </p>
+<p align="left">
 The implementation can be found in (Realini & Reguzzoni, 2013). In the other hand, the satellite clock offset can also be obtained from ephemeris data, which can refers to equation (2) in (ARINC, 2000). 
+</p>
+<p align="left">
 After getting the satellite position, we can use the given pseudorange to resolve the receiver position with least squares (LS) estimation. In general, the pseudorange measurement of i-th satellite can be expressed as, 
+</p>
+<p align="center">
+<img src="Img/eq_symbols/image010.png">
+</p>
+<p align="left">
+where <img src="Img/eq_symbols/image011.png"> is the geometry distance between the receiver and the i-th satellite, such as <img src="Img/eq_symbols/image012.png">. <img src="Img/eq_symbols/image013.png">, <img src="Img/eq_symbols/image014.png">, and <img src="Img/eq_symbols/image015.png"> are the receiver location x, y, and z in ECEF coordinates, respectively. Similarly, <img src="Img/eq_symbols/image016.png">, <img src="Img/eq_symbols/image017.png">, and <img src="Img/eq_symbols/image018.png"> are the i-th satellite position x, y, and z in ECEF coordinates, respectively. c is the constant of speed of light, e.g. 299792458.0 m/s. <img src="Img/eq_symbols/image020.png"> is the receiver clock delay. <img src="Img/eq_symbols/image021.png"> is the satellite clock offset for i-th satellite which can be determined with the ephemeris data. <img src="Img/eq_symbols/image022.png"> and <img src="Img/eq_symbols/image023.png"> are the tropospheric and ionospheric delay, respectively. Noted that only the tropospheric delay is going to estimate in this example. <img src="Img/eq_symbols/image023.png"> is the other noise from receiver, environment, or commonly system biases. 
+</p>
 
 
 ## Results
