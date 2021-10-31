@@ -36,8 +36,11 @@ If the code excuted successfully, following figure will be shown.
 </p>
 
 And the variables change and update on each iteration are summarized in follow dryrun table,
-| Iterations   | LS solution: position X changed   | LS solution: position Y changed   | LS solution: position Z changed   | LS solution: receiver clock changed  | Residual    | Updated position ECEF (m)     | Updated position WGS84 LLA (deg, deg, m)  | Updated receiver clock offset     | Total positioning error (m)   |
-| ------------ | --------------------------------  | -------------------------------   | -------------------------------   | -----------------------------------  | ---------   | ------------------    | ----------------------------------------  | -----------------------------     | ----------------------------  |
+| Iterations   | LS solution: position X, Y, Z changed (m)   | LS solution: receiver clock changed  | Residual    | Updated position ECEF (m)     | Updated position WGS84 LLA (deg, deg, m)  | Updated receiver clock offset     | Total positioning error (m)   |
+| ------------ |  -------------------------------   | -----------------------------------  | ---------   | ------------------    | ----------------------------------------  | -----------------------------     | ----------------------------  |
+| 0 (initial)   | /     | /     | /      | -2694685.473, -4293642.366, 3857878.924 | 37.458376433, -122.112338996, -31.456 | /  | 6374.466 |
+
+
 
 And skyplot of given dataset is as following, each circle represents one satellite, the color represents its SNR in dBHz, the text inside is the corresponding satellite ID.
 <p align="center">
