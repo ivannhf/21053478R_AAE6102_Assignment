@@ -36,9 +36,15 @@ If the code excuted successfully, following figure will be shown.
 </p>
 
 And the variables change and update on each iteration are summarized in follow dryrun table,
-| Iterations   | LS solution: position X, Y, Z changed (m)   | LS solution: receiver clock changed  | Residual    | Updated position ECEF (m)     | Updated position WGS84 LLA (deg, deg, m)  | Updated receiver clock offset     | Total positioning error (m)   |
+| Iterations   | LS solution: position X, Y, Z changed (m)   | LS solution: receiver clock changed  | Residual (m^2)    | Updated position ECEF (m)     | Updated position WGS84 LLA (deg, deg, m)  | Updated receiver clock offset     | Total positioning error (m)   |
 | ------------ |  -------------------------------   | -----------------------------------  | ---------   | ------------------    | ----------------------------------------  | -----------------------------     | ----------------------------  |
-| 0 (initial)   | /     | /     | /      | -2694685.473, -4293642.366, 3857878.924 | 37.458376433, -122.112338996, -31.456 | /  | 6374.466 |
+| 0 (initial) | /                              | /                        | /        | -2694685.473, -4293642.366, 3857878.924 | 37.458376433, -122.112338996, -31.456 | /  | 6374.466 |
+| 1           | -5732.970, 1105.486, -2614.371 | 0.0017327s (519449.765m) | 1795.743 | -2700418.443, -4292536.880, 3855264.553 | 37.428093219, -122.173840136, 57.578  | 0.0017327s (519449.765m) | 30.073 |
+
+
+
+
+
 
 
 
