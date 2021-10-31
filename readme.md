@@ -15,7 +15,10 @@ The aim of the assessment is to get familiar with decoding the GPS ephemeris dat
 
 
 ## Code Explanation
-The first part requires us to use the orbit parameters in ephemeris data to resolve the satellites’ ECEF position and satellite clock offset. The instruction on how to use the orbit parameters to estimate the satellite position for a given GPS time can be found in (ARINC, 2000). The satellites’ position can be calculated by Table 20-IV in (ARINC, 2000). After we obtained the earth-fixed coordinates, we also apply the earth rotation correction. Where this correction is to compensate the signal attenuation during the transmission that caused by the earth rotation. The implementation can be found in (Realini & Reguzzoni, 2013). In the other hand, the satellite clock offset can also be obtained from ephemeris data, which can refers to equation (2) in (ARINC, 2000).
+The code can be divided into two main part. The first part requires us to use the orbit parameters in ephemeris data to resolve the satellites’ ECEF position and satellite clock offset. Followed by forming the linear system based on pseudorange observation. Finally, we can resolve the receiver position and clock offset by LS method. The flowchart is as follows, 
+<p align="center">
+<img src="Img/Figure_1_Flowchart.jpg">
+</p>
 
 
 ## Results
@@ -27,12 +30,12 @@ NOTE: if you wish to disable troposheric delay correction, please change the val
 
 If the code excuted successfully, following figure will be shown.
 <p align="center">
-<img src="Img/Figure_1_Positioning-results.jpg">
+<img src="Img/Figure_2_Positioning-results.jpg">
 </p>
 
 And skyplot of given dataset is as following, each circle represents one satellite, the color represents its SNR in dBHz, the text inside is the corresponding satellite ID.
 <p align="center">
-<img src="Img/Figure_2_Skyplot.jpg">
+<img src="Img/Figure_3_Skyplot.jpg">
 </p>
 
 <!-- Please enjoy! :tada: -->
