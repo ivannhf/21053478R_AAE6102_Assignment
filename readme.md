@@ -10,7 +10,7 @@
       <a href="#Instructions">Instructions</a>
     </li>
     <li>
-      <a href="#Code Explanation">Code Explanation</a>
+      <a href="#Code-Explanation">Code Explanation</a>
     </li>
     <li>
       <a href="#Results">Results</a>
