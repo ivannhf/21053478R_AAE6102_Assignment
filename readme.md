@@ -24,6 +24,19 @@ The instruction on how to use the orbit parameters to estimate the satellite pos
 
 
 ## Results
+The calculated satellite ECEF position and clock offset as follow,
+| Satellite ID | Satellite ECEF X (m) | Satellite ECEF Y (m) | Satellite ECEF Z (m) | Satellite clock offset (s) | Satellite clock offset (m) |
+| ------------ | -------------------- | -------------------- | -------------------- | -------------------------- | -------------------------- |
+| 5            | -8855587.377         | -22060120.339        | -11922092.593        |  0.00018907                | 56680.482                  |
+| 6            | -8087225.358         | -16945964.648        |  18816194.508        | -0.00000008                | -25.162                    |
+| 10           |  9027649.354         |	-12319230.777        |  21737387.598        |  0.00003325                | 9967.388                   |
+| 17           | -21277120.383        |	-7467120.981         |  14287503.452        | -0.00020490                | -61428.267                 |
+| 22           | -13649527.756        |	 8229508.102         |  21122958.527        |  0.00022268                | 66757.213                  |
+| 23           | -19452317.265        | -16750378.609        | -6918520.642         |  0.00001036                | 3105.913                   |
+| 26           |  6162914.086         | -25286773.704        | -3541190.268         |  0.00028099                | 84239.633                  |
+| 30           | -17713896.270        | -19797468.525        |  19209.132           | -0.00001004                | -3010.256                  |
+
+
 Initial position in earth-centred-earth-fixed (ECEF) coordinates (in meter) is `(-2694685.473m, -4293642.366m, 3857878.924m)`. 
 
 The LS is solved iteratively. After several iteration, the ECEF solution (in meter) is `(-2700418.609m, -4292537.059m, 3855264.740m)`. In WGS84 coordinates format with latitude (degree), longitude (degree), and altitude(meter), it is `(37.428085437°, -122.173474221°, 70.629m)`. The estimated receiver clock offset is `519449.313m (0.0017327s)`. The estimated position error is `30.004m`.
