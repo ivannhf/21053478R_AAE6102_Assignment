@@ -7,19 +7,19 @@
       <a href="#Intorduction">Introdution</a>
     </li>
     <li>
-      <a href="## Instructions">Instructions</a>
+      <a href="#Instructions">Instructions</a>
     </li>
     <li>
-      <a href="## Code Explanation">Code Explanation</a>
+      <a href="#Code Explanation">Code Explanation</a>
     </li>
     <li>
-      <a href="## Results">Results</a>
+      <a href="#Results">Results</a>
     </li>  
      <li>
-      <a href="## Author">Author</a>
+      <a href="#References">References</a>
     </li>
      <li>
-      <a href="## References">References</a>
+      <a href="#Author">Author</a>
     </li>
   </ol>
 </details>
@@ -188,11 +188,11 @@ we can have a better understanding to the predicted positioning performance. The
 
 Please enjoy! :tada:
 
-## Author
-For any issues, please contact Hoi-Fung (Ivan) NG via email <21053478R@connect.polyu.hk>
-
 ## References
 1. ARINC Research Corporation. (2000). GPS Interface Control Document ICD-GPS-200 (IRN-200C-004): Navstar GPS Space Segment and Aviation User Interfaces.
 2. Herrera Olmo, Antonio & Suhandri, Hendy & Realini, Eugenio & Reguzzoni, Mirko & Lacy, Maria Clara de. (2015). goGPS: open-source MATLAB software. *GPS Solutions.* 20. 1-9. 10.1007/s10291-015-0469-x. 
 3. Takasu Tomoji. (2009). RTKLIB: Open Source Program Package for RTK-GPS. *FOSS4G 2009.* Tokyo, Japan, November 2, 2009.
+
+## Author
+For any issues, please contact Hoi-Fung (Ivan) NG via email <21053478R@connect.polyu.hk>
 
