@@ -24,7 +24,9 @@ The instruction on how to use the orbit parameters to estimate the satellite pos
 <p align="center">
 <img src="Img/eq_symbols/image002.png">
 </p>
-where <img height="28" alt="satellite transformed ecef" src="Img/eq_symbols/image003.png"> is the transformed coordinates of each satellite, and will be stored and use for LS later. <img src="Img/eq_symbols/image004.png"> are X, Y, and Z coordinates of the satellite following Table 20-IV in (ARINC, 2000). 
+<p align="left">
+where <img src="Img/eq_symbols/image003.png"> is the transformed coordinates of each satellite, and will be stored and use for LS later. <img src="Img/eq_symbols/image004.png"> are X, Y, and Z coordinates of the satellite following Table 20-IV in (ARINC, 2000). <img src="Img/eq_symbols/image006.png"> is the constant of the earth’s rotation rate. <img src="Img/eq_symbols/image007.png"> is the travelling time for the signal, such as <img src="Img/eq_symbols/image008.png">. This correction is to compensate the signal attenuation during the transmission that caused by the earth rotation.
+</p>
 
 
 ## Results
