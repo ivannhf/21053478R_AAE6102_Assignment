@@ -24,7 +24,7 @@ The instruction on how to use the orbit parameters to estimate the satellite pos
 <p align="center">
 <img src="Img/eq_symbols/image002.png">
 </p>
-where <img src="Img/eq_symbols/image003.png"> is the transformed coordinates of each satellite, and will be stored and use for LS later. <img src="Img/eq_symbols/image004.png"> are X, Y, and Z coordinates of the satellite following Table 20-IV in (ARINC, 2000). 
+where ![Transformed satellite ECEF]("Img/eq_symbols/image003.png") is the transformed coordinates of each satellite, and will be stored and use for LS later. <img src="Img/eq_symbols/image004.png"> are X, Y, and Z coordinates of the satellite following Table 20-IV in (ARINC, 2000). 
 
 
 ## Results
