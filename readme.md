@@ -36,8 +36,8 @@ If the code excuted successfully, following figure will be shown.
 </p>
 
 And the variables change and update on each iteration are summarized in follow dryrun table,
-|       | LS solution,  |   | Updated estimations   |   |
-| ----- | ---           |   | ---                   |   |
+| Iterations   | LS solution: position X changed   | LS solution: position Y changed   | LS solution: position Z changed   | LS solution: receiver clock changed  |
+| ------------ | --------------------------------  | -------------------------------   | -------------------------------   | -----------------------------------  |
 
 And skyplot of given dataset is as following, each circle represents one satellite, the color represents its SNR in dBHz, the text inside is the corresponding satellite ID.
 <p align="center">
